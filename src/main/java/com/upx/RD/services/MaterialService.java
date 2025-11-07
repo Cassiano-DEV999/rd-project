@@ -49,5 +49,4 @@ public class MaterialService {
         materialRepository.save(novoMaterial);
     }
 
-    // (Futuramente, adicionaremos o 'criarPostDeSobra' aqui)
 }
