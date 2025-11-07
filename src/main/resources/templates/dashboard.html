@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Calculadora de Obras</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-layout">
+
+<header class="navbar">
+    <a th:href="@{/dashboard}" class="navbar-brand">Calculadora de Obras</a>
+    <nav class="navbar-nav">
+
+        <a th:href="@{/feed}" style="font-weight: bold;">Ver Posts de Sobras</a>
+        <span>Olá, <strong th:text="${nomeUsuario}">Usuário</strong>!</span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn-logout">Sair</button>
+        </form>
+    </nav>
+</header>
+
+<main class="container-app">
+
+    <section class="card">
+        <h2>Cadastrar Nova Obra</h2>
+
+        <div th:if="${erroGlobal}" class="alert alert-danger">
+            <p th:text="${erroGlobal}"></p>
+        </div>
+
+        <form th:action="@{/obras/criar}" th:object="${novaObraDto}" method="post">
+
+            <div class="form-group">
+                <label for="nomeObra">Nome da Obra:</label>
+                <input type="text" id="nomeObra" th:field="*{nomeObra}">
+                <div th:if="${#fields.hasErrors('nomeObra')}"
+                     th:errors="*{nomeObra}"
+                     class="alert alert-danger" style="margin-top: 5px; padding: 5px;">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço (Opcional):</label>
+                <input type="text" id="endereco" th:field="*{endereco}">
+            </div>
+
+            <div class="form-group">
+                <label for="dataInicio">Data de Início (Opcional):</label>
+                <input type="date" id="dataInicio" th:field="*{dataInicio}"
+                       placeholder="AAAA-MM-DD">
+            </div>
+
+            <button type="submit" class="btn">Salvar Obra</button>
+        </form>
+    </section>
+
+
+    <section class="card">
+        <h2>Minhas Obras</h2>
+
+        <div th:if="${#lists.isEmpty(obras)}" class="alert alert-success"
+             style="background-color: #e6f7ff; color: #0056b3; text-align: center;">
+            Você ainda não cadastrou nenhuma obra. Comece usando o formulário acima!
+        </div>
+
+        <ul class_exists="obra-list" th:unless="${#lists.isEmpty(obras)}">
+
+            <li th:each="obra : ${obras}" class="obra-item">
+                <div class="obra-info">
+                    <h3 th:text="${obra.nomeObra}">Reforma Apartamento</h3>
+                    <p th:if="${obra.endereco}" th:text="${obra.endereco}">Rua Fictícia, 123</p>
+                </div>
+                <div class="obra-actions">
+                    <a th:href="@{/obras/{id}(id=${obra.id})}">
+                        Gerenciar Materiais
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* --- Container Principal --- */
+.container {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+h2 {
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Formulários --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-sizing: border-box; /* Garante que o padding não quebre o layout */
+    font-size: 1rem;
+}
+
+/* --- Botões --- */
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* --- Mensagens de Alerta (Sucesso e Erro) --- */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* --- Links --- */
+.login-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- Estilos do Layout Principal (Dashboard) --- */
+body.app-layout {
+    height: auto; /* Remove a altura fixa de 100vh */
+    display: block; /* Remove o flexbox centralizado */
+    background-color: #f9f9f9;
+}
+
+/* --- Cabeçalho (Navbar) --- */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-nav span {
+    color: #555;
+}
+
+.navbar-nav a,
+.navbar-nav button {
+    color: #007bff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.navbar-nav a:hover,
+.navbar-nav button:hover {
+    text-decoration: underline;
+}
+
+/* --- Conteúdo Principal (Main) --- */
+main.container-app {
+    max-width: 1000px;
+    margin: 2rem auto; /* Centraliza o conteúdo */
+    padding: 0 1rem;
+}
+
+/* --- Seções (Formulário e Lista) --- */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+/* --- Tabela/Lista de Obras --- */
+.obra-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.obra-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.obra-item:last-child {
+    border-bottom: none;
+}
+
+.obra-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.25rem;
+}
+
+.obra-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.obra-actions a {
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.obra-actions a:hover {
+    background-color: #0056b3;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Título da Obra (para separar do "Voltar") */
+.page-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+.page-header h1 {
+    margin: 0;
+}
+.page-header p {
+    margin: 0.25rem 0 0 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* --- Tabela de Materiais --- */
+.materiais-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.materiais-table th,
+.materiais-table td {
+    text-align: left;
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.materiais-table th {
+    background-color: #fcfcfc;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #555;
+}
+
+/* Colunas calculadas */
+.col-calculado {
+    font-weight: 600;
+    color: #333;
+}
+.col-desperdicio {
+    color: #d9534f; /* Vermelho */
+}
+.col-sobra {
+    color: #5cb85c; /* Verde */
+}
+
+/* --- Formulário na Tabela (Criar Post) --- */
+.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-inline input[type="number"] {
+    width: 90px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Botão pequeno */
+.btn-sm {
+    background-color: #17a2b8; /* Ciano */
+    color: white;
+    border: none;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-sm:hover {
+    background-color: #117a8b;
+}

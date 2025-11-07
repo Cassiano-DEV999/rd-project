@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S_obras - Posts de Sobras Disponíveis</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-layout">
+
+<header class="navbar">
+    <a th:href="@{/dashboard}" class="navbar-brand">S_obras</a>
+    <nav class="navbar-nav">
+
+        <a th:href="@{/feed}" style="font-weight: bold;">Ver Posts de Sobras</a>
+
+        <th:block th:if="${#authentication.isAuthenticated()}">
+            <span>Olá, <strong th:text="${#authentication.name}">Usuário</strong>!</span>
+            <a th:href="@{/dashboard}">Meu Dashboard</a>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn-logout">Sair</button>
+            </form>
+        </th:block>
+
+        <th:block th:unless="${#authentication.isAuthenticated()}">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/cadastro}">Cadastre-se</a>
+        </th:block>
+
+    </nav>
+</header>
+
+<main class="container-app">
+
+    <div class="page-header">
+        <h1>Posts de Sobras Disponíveis</h1>
+        <p>Veja os pacotes de materiais agrupados de diversas obras.</p>
+    </div>
+
+    <div th:if="${#lists.isEmpty(posts)}" class="alert alert-success"
+         style="background-color: #e6f7ff; color: #0056b3; text-align: center;">
+        Nenhum post de sobra disponível no momento.
+    </div>
+
+    <div th:each="post : ${posts}">
+        <section class="card">
+            <h2 th:text="${post.titulo}">Sobra de Materiais - Predio 1</h2>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                <div>
+                    <strong>Valor do Pacote:</strong>
+                    <span class="col-calculado col-sobra" style="font-size: 1.2rem;"
+                          th:text="'R$ ' + ${#numbers.formatDecimal(post.precoTotal, 1, 2)}">
+                            R$ 500,00
+                        </span>
+                </div>
+                <div>
+                    <strong>Postado em:</strong>
+                    <span th:text="${#temporals.format(post.dataCriacao, 'dd/MM/yyyy')}">07/11/2025</span>
+                </div>
+            </div>
+
+            <h3>Materiais Inclusos no Pacote:</h3>
+            <table class="materiais-table">
+                <thead>
+                <tr>
+                    <th>Material</th>
+                    <th class="col-calculado col-sobra">Quantidade (Sobra)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="mat : ${post.obraOrigem.materiais}"
+                    th:if="${mat.getQuantidadeSobraCalculada() > 0}"> <td th:text="${mat.descricao}">Cimento</td>
+                    <td class="col-calculado col-sobra"
+                        th:text="${#numbers.formatDecimal(mat.getQuantidadeSobraCalculada(), 1, 2)} + ' ' + ${mat.unidade.name()}">
+                        140.00 KG
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+</main>
+
+</body>
+</html>

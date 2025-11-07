@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-obra
+    environment:
+      POSTGRES_USER: seu_usuario
+      POSTGRES_PASSWORD: sua_senha_forte
+      POSTGRES_DB: calculadora_db
+    ports:
+      - "5432:5432"
+    volumes:
+      # AQUI ESTÁ A MUDANÇA:
+      # Mapeia a pasta ./docker/postgres-data (no seu projeto)
+      # para a pasta /var/lib/postgresql/data (dentro do container).
+      - ./docker/postgres-data:/var/lib/postgresql/data

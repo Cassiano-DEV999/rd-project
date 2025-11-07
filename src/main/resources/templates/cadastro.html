@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Calculadora de Obras</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Crie sua Conta</h2>
+
+    <div th:if="${erroCadastro}" class="alert alert-danger">
+        <p th:text="${erroCadastro}"></p>
+    </div>
+
+    <form th:action="@{/cadastro}" th:object="${usuarioDto}" method="post">
+
+        <div class="form-group">
+            <label for="nomeCompleto">Nome Completo:</label>
+            <input type="text" id="nomeCompleto" th:field="*{nomeCompleto}" required>
+            <div th:if="${#fields.hasErrors('nomeCompleto')}"
+                 th:errors="*{nomeCompleto}"
+                 class="alert alert-danger" style="margin-top: 5px; padding: 5px;">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Email (Login):</label>
+            <input type="email" id="username" th:field="*{username}" required>
+            <div th:if="${#fields.hasErrors('username')}"
+                 th:errors="*{username}"
+                 class="alert alert-danger" style="margin-top: 5px; padding: 5px;">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" th:field="*{password}" required>
+            <div th:if="${#fields.hasErrors('password')}"
+                 th:errors="*{password}"
+                 class="alert alert-danger" style="margin-top: 5px; padding: 5px;">
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Criar Conta</button>
+    </form>
+
+    <div class="login-link">
+        <span>Já tem uma conta?</span>
+        <a th:href="@{/login}">Faça Login</a>
+    </div>
+</div>
+
+</body>
+</html>
