@@ -1,42 +1,41 @@
-package com.upx.RD.model; // Seu pacote está correto
+package com.upx.RD.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "posts_sobra")
-public class PostSobra {
+@Table(name = "posts")
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O título do post é obrigatório")
+    @NotBlank
     private String titulo;
-
-    @PositiveOrZero(message = "O preço não pode ser negativo")
-    private double precoTotal;
 
     @Enumerated(EnumType.STRING)
     private StatusPost status;
 
     private LocalDate dataCriacao;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "obra_id", unique = true)
-    private Obra obraOrigem;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario proprietario;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPost> itens;
 
     @PrePersist
     public void prePersist() {

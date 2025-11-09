@@ -1,12 +1,15 @@
 package com.upx.RD.controllers;
 
+import com.upx.RD.dto.ItemVendaDto;
 import com.upx.RD.dto.MaterialCadastroDto;
 import com.upx.RD.dto.ObraCadastroDto;
+import com.upx.RD.dto.PostAgrupadoDto;
 import com.upx.RD.model.Material;
 import com.upx.RD.model.Obra;
+import com.upx.RD.model.Post;
 import com.upx.RD.services.MaterialService;
 import com.upx.RD.services.ObraService;
-import com.upx.RD.services.PostSobraService;
+import com.upx.RD.services.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,7 +28,7 @@ public class ObraController {
 
     private final ObraService obraService;
     private final MaterialService materialService;
-    private final PostSobraService postSobraService;
+    private final PostService postService;
 
 
     @GetMapping("/dashboard")
@@ -91,41 +95,36 @@ public class ObraController {
 
         try {
             Obra obra = obraService.buscarObraPorIdEUsuario(id, principal.getName());
-
             List<Material> materiais = materialService.listarMateriaisPorObra(id);
 
             model.addAttribute("obra", obra);
             model.addAttribute("materiais", materiais);
-
             model.addAttribute("novoMaterialDto", new MaterialCadastroDto());
+
+            PostAgrupadoDto postDto = new PostAgrupadoDto();
+            postDto.setTituloPost(String.format("Sobra de Materiais - Obra '%s'", obra.getNomeObra()));
+            postDto.setItens(new ArrayList<>());
+
+            for (Material mat : materiais) {
+                double sobra = mat.getQuantidadeSobraCalculada();
+                if (sobra > 0) {
+                    ItemVendaDto itemDto = new ItemVendaDto();
+                    itemDto.setMaterialId(mat.getId());
+                    itemDto.setDescricao(mat.getDescricao());
+                    itemDto.setSobra(sobra);
+                    itemDto.setUnidade(mat.getUnidade().name());
+                    itemDto.setPrecoVenda(0.00);
+
+                    postDto.getItens().add(itemDto);
+                }
+            }
+
+            model.addAttribute("postAgrupadoDto", postDto);
 
             return "detalhe-obra";
 
         } catch (IllegalStateException e) {
             return "redirect:/dashboard?erro=" + e.getMessage();
         }
-    }
-
-    @PostMapping("/obras/{id}/criar-post")
-    public String criarPostAgrupado(
-            @PathVariable("id") Long obraId,
-            @RequestParam("precoTotal") double precoTotal,
-            Principal principal,
-            RedirectAttributes redirectAttributes) {
-
-        String redirectUrl = "redirect:/obras/" + obraId;
-
-        try {
-            String username = principal.getName();
-
-            postSobraService.criarPostSobraAgrupado(obraId, precoTotal, username);
-
-            redirectAttributes.addFlashAttribute("sucessoPost", "Post agrupado criado com sucesso!");
-
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erroPost", "Erro ao criar post: " + e.getMessage());
-        }
-
-        return redirectUrl;
     }
 }

@@ -5,28 +5,30 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record MaterialCadastroDto(
+// DEVE SER UMA CLASSE com @Data e @NoArgsConstructor
+@Data
+@NoArgsConstructor
+public class MaterialCadastroDto {
 
-        @NotBlank(message = "Descrição é obrigatória")
-        String descricao,
+    // E OS CAMPOS DEVEM SER PRIVADOS
+    @NotBlank(message = "Descrição é obrigatória")
+    private String descricao;
 
-        @NotNull(message = "Unidade é obrigatória")
-        Unidade unidade,
+    @NotNull(message = "Unidade é obrigatória")
+    private Unidade unidade;
 
-        @Positive(message = "Quantidade deve ser positiva")
-        double quantidadeComprada,
+    @PositiveOrZero(message = "O preço não pode ser negativo")
+    private double preco;
 
-        @PositiveOrZero(message = "Percentual de desperdício não pode ser negativo")
-        double percentualDesperdicio, // Ex: 30%
+    @Positive(message = "A quantidade deve ser positiva")
+    private double quantidadeComprada;
 
-        @PositiveOrZero(message = "Percentual de sobra não pode ser negativo")
-        double percentualSobra // Ex: 20%
+    @PositiveOrZero(message = "Percentual de desperdício não pode ser negativo")
+    private double percentualDesperdicio;
 
-
-) {
-
-    public MaterialCadastroDto() {
-        this("", null, 0.0, 0.0, 0.0);
-    }
+    @PositiveOrZero(message = "Percentual de sobra não pode ser negativo")
+    private double percentualSobra;
 }

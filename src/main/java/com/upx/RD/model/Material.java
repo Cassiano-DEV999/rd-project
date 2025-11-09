@@ -1,4 +1,4 @@
-package com.upx.RD.model; // Mantenha seu pacote
+package com.upx.RD.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +40,9 @@ public class Material {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "obra_id", nullable = false)
     private Obra obra;
+
+    @PositiveOrZero(message = "O preço não pode ser negativo")
+    private double preco;
 
 
     public double getQuantidadeDesperdicioCalculado() {

@@ -1,7 +1,7 @@
-package com.upx.RD.controllers;
+package com.upx.RD.controllers; // Mantenha seu pacote
 
-import com.upx.RD.model.PostSobra;
-import com.upx.RD.services.PostSobraService;
+import com.upx.RD.model.Post;
+import com.upx.RD.services.PostService; // <<< O SERVIÇO CORRETO
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +13,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeedController {
 
-    private final PostSobraService postSobraService;
+    private final PostService postService;
 
 
     @GetMapping("/feed")
     public String exibirFeed(Model model) {
 
-        List<PostSobra> posts = postSobraService.listarPostsDisponiveis();
+        List<Post> posts = postService.listarPostsDisponiveis();
+
         model.addAttribute("posts", posts);
+
         return "feed";
     }
 }

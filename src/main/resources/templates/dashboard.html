@@ -8,17 +8,7 @@
 </head>
 <body class="app-layout">
 
-<header class="navbar">
-    <a th:href="@{/dashboard}" class="navbar-brand">Calculadora de Obras</a>
-    <nav class="navbar-nav">
-
-        <a th:href="@{/feed}" style="font-weight: bold;">Ver Posts de Sobras</a>
-        <span>Olá, <strong th:text="${nomeUsuario}">Usuário</strong>!</span>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn-logout">Sair</button>
-        </form>
-    </nav>
-</header>
+<header th:replace="~{fragments/navbar :: navbar}"></header>
 
 <main class="container-app">
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header class="navbar" th:fragment="navbar">
+    <a th:href="@{/dashboard}" class="navbar-brand">Calculadora de Obras</a>
+    <nav class="navbar-nav">
+
+        <a th:href="@{/feed}" style="font-weight: bold;">Ver Posts</a>
+
+        <a th:href="@{/posts/novo}" class="btn" style="padding: 0.5rem 1rem; margin-right: 1rem;">
+            + Criar Post Manual
+        </a>
+
+        <span th:if="${#authentication.isAuthenticated()}">
+                Olá, <strong th:text="${#authentication.name}">Usuário</strong>!
+            </span>
+        <form th:action="@{/logout}" method="post" th:if="${#authentication.isAuthenticated()}">
+            <button type="submit" class="btn-logout">Sair</button>
+        </form>
+
+    </nav>
+</header>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Editando Post: ' + ${post.titulo}">Editar Post</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-layout">
+
+<header th:replace="~{fragments/navbar :: navbar}"></header>
+
+<main class="container-app">
+    <a th:href="@{/dashboard}" class="back-link">&larr; Voltar para o Dashboard</a>
+
+    <div class="page-header">
+        <h1 th:text="${post.titulo}">Título do Post</h1>
+    </div>
+
+    <section class="card">
+        <h2>Adicionar Item ao Post (Etapa 2)</h2>
+
+        <div th:if="${sucessoItem}" class="alert alert-success" th:text="${sucessoItem}"></div>
+        <div th:if="${erroItem}" class="alert alert-danger" th:text="${erroItem}"></div>
+
+        <form th:action="@{/posts/{postId}/adicionar-item(postId=${post.id})}" th:object="${itemPostDto}" method="post">
+
+            <div class="form-group">
+                <label for="descricao">Descrição (Ex: Cimento):</label>
+                <input type="text" id="descricao" th:field="*{descricao}">
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" step="0.01" id="quantidade" th:field="*{quantidade}">
+            </div>
+            <div class="form-group">
+                <label for="unidade">Unidade:</label>
+                <select id="unidade" th:field="*{unidade}">
+                    <option value="">Selecione</option>
+                    <option th:each="unidadeOpt : ${T(com.upx.RD.model.Unidade).values()}"
+                            th:value="${unidadeOpt}"
+                            th:text="${unidadeOpt.name()}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço (R$):</label>
+                <input type="number" step="0.01" id="preco" th:field="*{preco}">
+            </div>
+
+            <button type="submit" class="btn">Adicionar Item</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Itens Atuais no Post</h2>
+
+        <div th:if="${#lists.isEmpty(post.itens)}" class="alert alert-success">
+            Nenhum item adicionado a este post ainda.
+        </div>
+
+        <table class="materiais-table" th:unless="${#lists.isEmpty(post.itens)}">
+            <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor (R$)</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${post.itens}">
+                <td th:text="${item.descricao}">Cimento</td>
+                <td th:text="${#numbers.formatDecimal(item.quantidade, 1, 2)} + ' ' + ${item.unidade.name()}">100.00 KG</td>
+                <td class="col-calculado col-sobra" th:text="'R$ ' + ${#numbers.formatDecimal(item.preco, 1, 2)}">R$ 50,00</td>
+                <td>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+</body>
+</html>

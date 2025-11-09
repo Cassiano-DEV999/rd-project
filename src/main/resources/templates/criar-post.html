@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Post - Etapa 1</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-layout">
+
+<header th:replace="~{fragments/navbar :: navbar}"></header>
+
+<main class="container-app">
+    <a th:href="@{/dashboard}" class="back-link">&larr; Voltar para o Dashboard</a>
+    <section class="card">
+        <h2>Criar Novo Post (Etapa 1 de 2)</h2>
+        <p>Primeiro, dê um título para o seu post. Você adicionará os itens na próxima etapa.</p>
+
+        <form th:action="@{/posts/criar}" method="post">
+            <div class="form-group">
+                <label for="titulo">Título do Post:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <button type="submit" class="btn">Continuar e Adicionar Itens</button>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>

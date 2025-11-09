@@ -31,20 +31,17 @@ public class MaterialService {
         Obra obra = obraRepository.findById(obraId)
                 .orElseThrow(() -> new IllegalArgumentException("Obra não encontrada"));
 
-
         Material novoMaterial = new Material();
-        novoMaterial.setDescricao(dto.descricao());
-        novoMaterial.setUnidade(dto.unidade());
-        novoMaterial.setQuantidadeComprada(dto.quantidadeComprada());
+        novoMaterial.setDescricao(dto.getDescricao());
+        novoMaterial.setUnidade(dto.getUnidade());
+        novoMaterial.setQuantidadeComprada(dto.getQuantidadeComprada());
+
+        novoMaterial.setPreco(dto.getPreco());
 
 
-        novoMaterial.setPercentualDesperdicio(dto.percentualDesperdicio());
-        novoMaterial.setPercentualSobra(dto.percentualSobra());
-
-
-
+        novoMaterial.setPercentualDesperdicio(dto.getPercentualDesperdicio());
+        novoMaterial.setPercentualSobra(dto.getPercentualSobra());
         novoMaterial.setObra(obra);
-
 
         materialRepository.save(novoMaterial);
     }

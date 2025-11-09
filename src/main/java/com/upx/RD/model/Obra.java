@@ -1,6 +1,5 @@
 package com.upx.RD.model;
 
-import com.upx.RD.model.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -37,6 +36,4 @@ public class Obra {
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Material> materiais;
 
-    @OneToOne(mappedBy = "obraOrigem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private PostSobra postDeSobra;
 }
