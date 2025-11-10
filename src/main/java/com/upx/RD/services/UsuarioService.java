@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service // Marca esta classe como um "Serviço" do Spring
-@RequiredArgsConstructor // Injeta as dependências via construtor
+@Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    private final PasswordEncoder passwordEncoder; // Injetado do SecurityConfig
+    private final PasswordEncoder passwordEncoder;
 
 
     public void cadastrarNovoUsuario(CadastroDto dto) {

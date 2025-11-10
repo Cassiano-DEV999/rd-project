@@ -20,7 +20,7 @@ public class ObraService {
     private final ObraRepository obraRepository;
     private final UsuarioRepository usuarioRepository;
 
-    @Transactional(readOnly = true) // Boa prática para métodos de leitura
+    @Transactional(readOnly = true)
     public List<Obra> listarObrasPorUsuario(String username) {
         Long usuarioId = getUsuarioLogado(username).getId();
         return obraRepository.findByProprietarioId(usuarioId);

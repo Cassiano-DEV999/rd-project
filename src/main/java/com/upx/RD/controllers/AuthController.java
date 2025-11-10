@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller // ATENÇÃO: @Controller, e não @RestController!
+@Controller
 @RequiredArgsConstructor
 public class AuthController {
 

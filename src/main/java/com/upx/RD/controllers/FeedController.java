@@ -1,7 +1,7 @@
-package com.upx.RD.controllers; // Mantenha seu pacote
+package com.upx.RD.controllers;
 
 import com.upx.RD.model.Post;
-import com.upx.RD.services.PostService; // <<< O SERVIÇO CORRETO
+import com.upx.RD.services.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

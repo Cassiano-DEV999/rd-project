@@ -8,12 +8,10 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// DEVE SER UMA CLASSE com @Data e @NoArgsConstructor
 @Data
 @NoArgsConstructor
 public class MaterialCadastroDto {
 
-    // E OS CAMPOS DEVEM SER PRIVADOS
     @NotBlank(message = "Descrição é obrigatória")
     private String descricao;
 

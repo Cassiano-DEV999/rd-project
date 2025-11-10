@@ -6,7 +6,6 @@ import com.upx.RD.dto.ObraCadastroDto;
 import com.upx.RD.dto.PostAgrupadoDto;
 import com.upx.RD.model.Material;
 import com.upx.RD.model.Obra;
-import com.upx.RD.model.Post;
 import com.upx.RD.services.MaterialService;
 import com.upx.RD.services.ObraService;
 import com.upx.RD.services.PostService;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;

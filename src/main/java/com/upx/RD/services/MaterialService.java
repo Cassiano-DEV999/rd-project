@@ -17,7 +17,7 @@ import java.util.List;
 public class MaterialService {
 
     private final MaterialRepository materialRepository;
-    private final ObraRepository obraRepository; // Para associar o material
+    private final ObraRepository obraRepository;
 
 
     @Transactional(readOnly = true)

@@ -12,7 +12,7 @@ public record CadastroDto(
 
         @Email(message = "Formato de email inválido")
         @NotBlank(message = "O email (login) é obrigatório")
-        String username, // Usaremos o email como login
+        String username,
 
         @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres")
         @NotBlank(message = "A senha é obrigatória")

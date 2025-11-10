@@ -10,6 +10,6 @@ public record ObraCadastroDto(
 
         String endereco,
 
-        String dataInicio // Vamos receber como texto por enquanto
+        String dataInicio
 ) {
 }

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/posts") // Todas as rotas deste controller começam com /posts
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostController {
 
